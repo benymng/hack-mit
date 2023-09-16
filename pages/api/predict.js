@@ -20,6 +20,7 @@ export default async function handler(req, res) {
     // For example, you can make a test prediction here
     const testInput = tensor2d([[1, 85, 66, 29, 0, 26.6, 0.351, 31]], [1, 8]);
     const predictions = await model.predict(testInput).dataSync();
+    console.log('made it here')
     
     res.status(200).json({ message: 'Model loaded successfully', predictions });
   } catch (error) {
