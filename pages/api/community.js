@@ -3,7 +3,7 @@ import { Pinecone } from "@pinecone-database/pinecone";
 const configurePineconeDb = async () => {
   const pinecone = new Pinecone({
     environment: "asia-southeast1-gcp-free",
-    apiKey: 'e299daeb-4d35-45c4-ba40-5a34a509879b',
+    apiKey: process.env.PINECONE_API,
   });
   const index = pinecone.Index("hack-mit");
   return index;
