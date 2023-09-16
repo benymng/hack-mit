@@ -21,11 +21,36 @@ const handler = async (req, res) => {
     return Buffer.from(data, 'base64');
   }
 
+  function filterText(text) {
+    const englishWordPattern = /\b[a-zA-Z]+\b/g;
+
+    // Use the regular expression to find English words in the text
+    const englishWords = text.match(englishWordPattern);
+    const returnWords = englishWords.filter((word) => word.length > 0)
+    return returnWords;
+  }
+
+  function createKeyValuePairs(text) {
+    const lines = text.split('\n');
+    const keyValuePairs = {};
+  
+    for (let line of lines) {
+      const parts = line.split(':');
+      if (parts.length === 2) {
+        const key = parts[0].trim();
+        const value = parts[1].trim();
+        keyValuePairs[key] = value;
+      }
+    }
+  
+    return keyValuePairs;
+  }
+
   const imageBuffer = decodeDataUriToBuffer(snapshot);
-  Tesseract.recognize(imageBuffer, 'eng', { logger: m => console.log(m) })
+  Tesseract.recognize(imageBuffer, 'eng')
   .then(({ data: { text } }) => {
-    // Extracted text from OCR
-    console.log('Extracted Text:', text);
+    const keyValuePairs = createKeyValuePairs(text);
+    console.log(keyValuePairs);
   })
   .catch(error => {
     console.error('OCR Error:', error);
