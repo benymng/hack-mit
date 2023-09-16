@@ -24,6 +24,13 @@ export default function Test() {
   const confirm = async () => {
     if (!snapshot) return;
     console.log('Confirming snapshot:', snapshot);
+    const res = await fetch('/api/decodeImage', {
+      method: 'POST',
+      body: JSON.stringify({
+        snapshot,
+      }),
+    });
+    const x = await res.json();
   };
 
   return (
