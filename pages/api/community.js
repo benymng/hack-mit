@@ -40,7 +40,7 @@ const getUserCommunity = async (userId) => {
 
 export default async function handler(req, res) {
   // insertIntoVectorDatabase('123123', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-  // console.log(await getUserCommunity('123123'))
+  console.log(await getUserCommunity('123123'))
 
   res.status(200).send({ message: 'hello world' });
   // if (req.method === 'POST') {

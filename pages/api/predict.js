@@ -1,8 +1,8 @@
-import * as tf from '@tensorflow/tfjs-node';
+import { loadLayersModel, tensor2d } from '@tensorflow/tfjs-node';
 
 async function loadModel() {
   const modelPath = './tfjs_model/model.json'; // Replace with the actual path
-  const model = await tf.loadLayersModel(`file://${modelPath}`);
+  const model = await loadLayersModel(`file://${modelPath}`);
   return model;
 }
 
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
     // You can now use the loaded model for predictions or other tasks
     // For example, you can make a test prediction here
-    const testInput = tf.tensor2d([[1, 85, 66, 29, 0, 26.6, 0.351, 31]], [1, 8]);
+    const testInput = tensor2d([[1, 85, 66, 29, 0, 26.6, 0.351, 31]], [1, 8]);
     const predictions = await model.predict(testInput).dataSync();
     
     res.status(200).json({ message: 'Model loaded successfully', predictions });
