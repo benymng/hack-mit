@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -33,26 +31,93 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Project Overview](#project-overview)
+- [Technology Stack](#technology-stack)
+- [Team and Responsibilities](#team-and-responsibilities)
+- [Development Timeline](#development-timeline)
+- [Computer Vision Repositories](#computer-vision-repositories)
+
+## Introduction
+
+This project is focused on document scanning and health data analysis using computer vision and machine learning. It combines various technologies to provide an innovative solution for document recognition, health data prediction, and community matching. This README provides an overview of the project and its components.
+
 ## Project Overview
 
-[Provide a more detailed overview of your project. Explain its main features, functionalities, and objectives. Use this section to showcase what makes your project unique and innovative.]
+The project comprises both frontend and backend components:
+
+- **Frontend**:
+  - Sign-up / Sign-in Page
+  - Home Page
+  - Data Display Page
+  - Community Page
+  - Integration of JavaScript Mobile Document Scanner
+  - Integration of user data storage
+
+- **Backend**:
+  - Processing text from images and associating key-value pairs
+  - Utilizes Django as the web framework
+  - Setting up vector databases and matching
+  - Data communication between frontend and backend
+  - Basic machine learning models for prediction
+  - Potential integration with large language models (LLMs)
+
+The core process involves taking pictures of paper documents, extracting key information using computer vision, user questionnaires processed through LLMs, and matching users to unique communities based on health data and other factors.
 
 ## Technology Stack
 
-The project utilizes the following technology stack:
+The project utilizes a diverse technology stack:
 
-- [List the technologies, frameworks, and tools used in your project. Provide brief descriptions if necessary.]
+- **File Managment**
+    - Github
+    - Git
+    - Git Reposetory
 
-## Learning and Collaboration
+- **Frontend**:
+  - Next.js
+  - JavaScript
+  - React
+  - Tailwind CSS
 
-[Explain how your team members learned and grew during the development process. Describe the collaborative aspects of your project, including teamwork and communication.]
+- **Backend**:
+  - Firebase
+  - PineconeDB
 
-## How to Use
+- **Computer Vision**:
+  - TensorFlow
+  - Tesseract
 
-[Provide instructions on how to run, install, or use your project. Include any prerequisites and installation steps necessary for users or contributors.]
+- **Form Creation**:
+  - Canva
+  - Figma
+  - Google Slides
 
-## Contributors
+## Team and Responsibilities
 
-This project was developed by:
+- John: Figma Mockup, Frontend Application of Mobile Site, Pitch Deck
+- Siya: Predictive Models, Computer Vision, Frontend, LLM Integration, Pitch Deck
+- Ben: Computer Vision, Predictive Models, Vector Database, Github & Git Reposetory Setup
+- Auston: Backend (API), Computer Vision, LLM Integration
 
-- [List the names and roles of project contributors, along with their contact information if desired.]
+## Development Timeline
+
+Here's an overview of the project development timeline:
+
+- Integration and pitch deck: 6 hours
+- Figma design: 2.5 hours
+- Frontend development: 12 hours
+- LLM integration: On hold (unless time allows)
+- Computer vision MVP: 12 hours
+- Predictive model MVP: 8 hours
+- Community matching via vector database: 6-hour MVP
+
+## Computer Vision Repositories
+
+The following repositories are relevant to the computer vision components of the project:
+
+- [Project Repository] (https://github.com/benymng/hack-mit)
+- [Document Scanner Repository](https://github.com/RuslanBrilenkov/Computer_Vision_Projects-1_Document_Scanner/blob/main/Document_Scanner.py)
+- [Barcode Scanner Repository](https://github.com/pamruta/Computer-Vision)
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
