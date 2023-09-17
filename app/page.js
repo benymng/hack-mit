@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { UserLogin } from "./components/UserLogin";
 import Navbar from "./components/NavBar";
@@ -9,6 +9,12 @@ export default function Home() {
   const router = useRouter();
   var user = firebase.auth().currentUser;
   console.log(user)
+  // useEffect(() => {
+  //   fetch('/api/discord')
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data))
+  //     .catch((error) => console.error(error));
+  // }, []);
 
   return (
     <section className="bg-white h-screen">

@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 
 export default function Community() {
   const [similarUsers, setSimilarUsers] = useState()
+  const [emailString, setEmailString] = useState()
   const [fullUsers, setFullUsers] = useState()
   useEffect(() => {
     const getCommunity = async (userId) => {
@@ -22,6 +23,7 @@ export default function Community() {
         if (response.ok) {
           const responseData = await response.json();
           setSimilarUsers(responseData.similarUsers)
+          setEmailString(responseData.similarUsers.map(user => user[1]).join(', '));
         }
       } catch (error) {
         console.error(error)
@@ -29,7 +31,33 @@ export default function Community() {
     }
     const userId = Cookies.get('userId')
     getCommunity(userId)
+    
   }, [])
+
+  useEffect(() => {
+    const createServer = async (input) => {
+      try {
+        const response = await fetch('/api/discord', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(input),
+        })
+        console.log(response)
+        if (response.ok) {
+          const responseData = await response.json();
+          if (responseData !== 'success') {
+            console.error('error')
+          }
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    createServer(emailString)
+  }, [emailString])
+
   console.log(similarUsers)
 
   return (
