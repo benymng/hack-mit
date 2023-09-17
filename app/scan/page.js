@@ -2,13 +2,19 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Webcam from 'react-webcam';
+import { Form } from '../components/Form';
 
 export default function Test() {
   const webcamRef = useRef(null);
   const router = useRouter();
   const [snapshot, setSnapshot] = useState(null);
   const [captured, setCaptured] = useState(false);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState();
+  const [showImage, setShowImage] = useState(false);
+
+  const updateShowImage = () => {
+    setShowImage(!showImage);
+  }
 
   const navigateToNewPage = (data) => {
     router.push('/');
@@ -52,38 +58,43 @@ export default function Test() {
       console.error('Fetch error:', error);
     }
   };
-  
-  
 
   return (
     <div>
-      <h1 className="text-white">{JSON.stringify(userData)}</h1>
-      {captured && snapshot && <img className="mx-auto border-none rounded-3xl my-10" src={snapshot} alt="snapshot" />}
-      {!captured && (
+      <Form data={userData} updateShowImage={updateShowImage} />
+      {(!userData || showImage) && (
+        <img
+          className="mx-auto border-none rounded-3xl my-10"
+          src={snapshot}
+        />
+      )}
+      {!captured && !showImage && (
         <div className="flex mx-auto w-4/5 lg:w-1/2 my-10">
           <Webcam
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            videoConstraints={{ facingMode: 'environment' }}
-            style={{ width: '100%', height: '100%', borderRadius: '2em' }}
+            videoConstraints={{ facingMode: "environment" }}
+            style={{ width: "100%", height: "100%", borderRadius: "2em" }}
           />
         </div>
       )}
       <div className="mt-10 flex justify-center items-center h-screenflex mx-auto">
-        <button
-          className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-          onClick={capture}
-        >
-          Capture
-        </button>
-        {captured && (
+        {!captured && (
+          <button
+            className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+            onClick={capture}
+          >
+            Capture
+          </button>
+        )}
+        {captured && !userData && (
           <>
             <button
               className="bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
               onClick={redo}
             >
-              Redo
+              Retake
             </button>
             <button
               className="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
@@ -91,6 +102,7 @@ export default function Test() {
             >
               Confirm
             </button>
+
           </>
         )}
       </div>
