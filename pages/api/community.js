@@ -9,16 +9,6 @@ const configurePineconeDb = async () => {
   return index;
 }
 
-const insertIntoVectorDatabase = async (userId, values) => {
-  const pineConeIndex = await configurePineconeDb();
-  let pineConeResult = await pineConeIndex.upsert([
-    {
-      id: userId,
-      values: values,
-    },
-  ]);
-}
-
 const getUserCommunity = async (userId) => {
   // Get the Pinecone index
   const pineConeIndex = await configurePineconeDb();
