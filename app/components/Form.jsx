@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
+import { useRouter } from "next/navigation";
 
 export const Form = ({ data, redo }) => {
+  const router = useRouter();
   // Check if data is empty or not provided
   if (!data || Object.keys(data).length === 0) {
     return null; // Return null or another placeholder if data is empty
@@ -15,9 +17,7 @@ export const Form = ({ data, redo }) => {
   const [bmi, setBMI] = useState(data["BMI"]);
   const [diabetesPedigreeDegree, setDiabetesPedigreeDegree] = useState(data["Diabetes Pedigree Degree"]);
   const [age, setAge] = useState(data["Age"]);
-  const [numbers, setNumbers] = useState()
   const [errorMessage, setErrorMessage] = useState("")
-  const [prediction, setPrediction] = useState(0)
 
   const getPrediction = async (inputData) => {
     try {
@@ -30,11 +30,12 @@ export const Form = ({ data, redo }) => {
       })
       if (response.ok) {
         const responseData = await response.json();
-        setPrediction(responseData.predictions)
+        console.log(responseData)
       }
     } catch (error) {
       setErrorMessage(error);
     }
+    router.push('/profile')
   }
 
   const handleSubmit = async (e) => {
@@ -65,16 +66,12 @@ export const Form = ({ data, redo }) => {
     }
   };
   
-  
-
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-      <h1>{numbers}</h1>
-      <h1>{prediction[0]}</h1>
       <div className="mx-auto max-w-lg text-center">
-        <h1 className="text-2xl font-bold sm:text-3xl">Your health data:</h1>
+        <h1 className="text-2xl font-bold text-left sm:text-4xl">Your health data:</h1>
 
-        <p className="mt-4 text-gray-500">
+        <p className="mt-4 text-gray-500 text-left">
           Review your health data and make changes, otherwise scroll down to the
           bottom and click continue.
         </p>

@@ -19,20 +19,19 @@ const getUserCommunity = async (userId) => {
   const matches = await pineConeIndex.query({
     vector: userValues,
     topK: 10,
+    includeMetadata: true,
   })
   const similarUsers = [];
   matches.matches.map((user) => {
-    similarUsers.push(user.id);
+    const userInfo = [user.id, user.metadata.email]
+    similarUsers.push(userInfo);
   })
   return similarUsers
 };
 
-
 export default async function handler(req, res) {
-  // insertIntoVectorDatabase('123123', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-  console.log(await getUserCommunity('123123'))
-
-  res.status(200).send({ message: 'hello world' });
+  const userId = req.body;
+  res.status(200).send({ similarUsers: await getUserCommunity(userId) });
   // if (req.method === 'POST') {
   //   insertIntoVectorDatabase('123123', ['1', '2', '3', '4', '5', '6', '7', '8']);
   // }

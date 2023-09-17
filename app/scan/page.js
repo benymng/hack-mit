@@ -64,7 +64,7 @@ export default function Test() {
     <div className="flex flex-col min-h-screen">
       <div className="bg-white">
         <Form data={userData} updateShowImage={updateShowImage} />
-        {(!userData || showImage) && (
+        {(captured) && (
           <img
             className="mx-auto border-none rounded-3xl my-4"
             src={snapshot}

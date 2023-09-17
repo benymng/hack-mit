@@ -1,26 +1,6 @@
 const { Buffer } = require('buffer');
 const Tesseract = require('tesseract.js');
-import { Pinecone } from "@pinecone-database/pinecone";
 import stringSimilarity from '@/utils/stringSimilarity';
-
-const configurePineconeDb = async () => {
-  const pinecone = new Pinecone({
-    environment: "asia-southeast1-gcp-free",
-    apiKey: process.env.PINECONE_API,
-  });
-  const index = pinecone.Index("hack-mit");
-  return index;
-}
-
-const insertIntoVectorDatabase = async (userId, values) => {
-  const pineConeIndex = await configurePineconeDb();
-  let pineConeResult = await pineConeIndex.upsert([
-    {
-      id: userId,
-      values: values,
-    },
-  ]);
-}
 
 function decodeDataUriToBuffer(dataUri) {
   const data = dataUri.split(';base64,').pop();

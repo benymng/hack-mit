@@ -1,7 +1,27 @@
 import { loadLayersModel, tensor2d } from '@tensorflow/tfjs-node';
 import { db } from '../../utils/firebase';
-import { collection, addDoc, doc } from "firebase/firestore";
-import Cookies from 'js-cookie';
+import { collection, addDoc } from "firebase/firestore";
+import { Pinecone } from "@pinecone-database/pinecone";
+
+const configurePineconeDb = async () => {
+  const pinecone = new Pinecone({
+    environment: "asia-southeast1-gcp-free",
+    apiKey: process.env.PINECONE_API,
+  });
+  const index = pinecone.Index("hack-mit");
+  return index;
+}
+
+const insertIntoVectorDatabase = async (userId, values, userEmail) => {
+  const pineConeIndex = await configurePineconeDb();
+  let pineConeResult = await pineConeIndex.upsert([
+    {
+      id: userId,
+      values: values,
+      metadata: {'email': userEmail}
+    },
+  ]);
+}
 
 const addDataToFirestore = async (collectionName, data) => {
   try {
@@ -39,6 +59,7 @@ export default async function handler(req, res) {
       "health-score": predictions[0],
       email: inputData.userEmail,
     };
+    insertIntoVectorDatabase(inputData.userId, inputData.array, inputData.userEmail)
     addDataToFirestore("users", dataToAdd);
     
     res.status(200).json({ message: 'Model loaded successfully', predictions });
