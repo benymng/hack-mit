@@ -110,7 +110,7 @@ Here's an overview of the project development timeline:
 - Frontend development: 12 hours
 - Computer vision MVP: 12 hours
 - Predictive model MVP: 8 hours
-- Community matching via vector database: 6-hour
+- Community matching via vector database: 6 hours
 
 ## Computer Vision Repositories
 
