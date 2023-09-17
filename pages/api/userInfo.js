@@ -3,7 +3,7 @@ import { doc, getDoc } from 'firebase/firestore';
 
 const getUserByID = async (collectionName, userId) => {
   try {
-    const userRef = doc(db, collectionName, '2o7ZjCqEOEr0F9D0lXGA');
+    const userRef = doc(db, collectionName, 'RttYchOlPqkPEKaXE3mp');
     const userDoc = await getDoc(userRef);
 
     if (!userDoc.exists()) {

@@ -12,6 +12,7 @@ export default function Test() {
   const [captured, setCaptured] = useState(false);
   const [userData, setUserData] = useState();
   const [showImage, setShowImage] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
   const updateShowImage = () => {
     setShowImage(!showImage);
@@ -32,6 +33,7 @@ export default function Test() {
 
   const redo = () => {
     setCaptured(false);
+    setConfirmed(false);
     setSnapshot(null);
   };
 
@@ -49,6 +51,7 @@ export default function Test() {
         // If the response status is OK (e.g., 200), you can access the response data
         const responseData = await response.json();
         setUserData(responseData.data)
+        setConfirmed(true);
         console.log(userData);
       } else {
         // If the response status is not OK, handle it accordingly
@@ -63,14 +66,16 @@ export default function Test() {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="bg-white">
-        <Form data={userData} updateShowImage={updateShowImage} />
-        {(captured) && (
+        {captured && confirmed && (
+          <Form data={userData} updateShowImage={updateShowImage} redo={redo} />
+        )}
+        {captured && (
           <img
             className="mx-auto border-none rounded-3xl my-4"
             src={snapshot}
           />
         )}
-        {!captured && !showImage && (
+        {!captured && (
           <div className="flex mx-auto w-4/5 lg:w-1/2 my-4">
             <Webcam
               audio={false}
@@ -91,7 +96,7 @@ export default function Test() {
             Capture
           </button>
         )}
-        {captured && !userData && (
+        {captured && !confirmed && (
           <>
             <button
               className="bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"

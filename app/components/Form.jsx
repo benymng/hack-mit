@@ -221,7 +221,7 @@ export const Form = ({ data, redo }) => {
           </button>
           <button
             className="flex-1 mx-1 inline-block rounded-lg bg-red-400 px-5 py-3 text-sm font-semibold text-white"
-            onClick={() => redo()}
+            onClick={redo}
           >
             Retake
           </button>

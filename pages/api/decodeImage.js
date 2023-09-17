@@ -42,6 +42,7 @@ function createKeyValuePairs(text) {
 async function recognizeImage(imageBuffer) {
   try {
     const { data: { text } } = await Tesseract.recognize(imageBuffer, 'eng');
+    // console.log(text)
     const keyValuePairs = createKeyValuePairs(text);
     const filteredKeyValuePairs = {};
     const keyValues = ['Pregnancies', 'Glucose', 'Blood Pressure', 'Skin Thickness', 'Insulin', 'BMI', 'Diabetes Pedigree Degree', 'Age'];
