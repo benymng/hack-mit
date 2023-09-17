@@ -69,7 +69,7 @@ export const Form = ({ data, redo }) => {
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-lg text-center">
-        <h1 className="text-2xl font-bold text-left sm:text-4xl">Your health data:</h1>
+        <h1 className="font-bold text-left text-4xl">Your health data:</h1>
 
         <p className="mt-4 text-gray-500 text-left">
           Review your health data and make changes, otherwise scroll down to the
