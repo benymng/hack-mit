@@ -3,6 +3,7 @@ import React, { useRef, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Webcam from 'react-webcam';
 import { Form } from '../components/Form';
+import Navbar from '../components/NavBar';
 
 export default function Test() {
   const webcamRef = useRef(null);
@@ -105,6 +106,9 @@ export default function Test() {
 
           </>
         )}
+      </div>
+      <div className="flex items-center justify-center p-4 bottom-0 absolute w-full bg-slate-100 rounded-t-3xl">
+        <Navbar />
       </div>
     </div>
   );

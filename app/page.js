@@ -78,7 +78,7 @@ export default function Home() {
           </div>
         </main>
       </div>
-      <div className="flex items-center justify-center p-4 bottom-0 absolute w-full">
+      <div className="flex items-center justify-center p-4 bottom-0 absolute w-full bg-slate-100 rounded-t-3xl">
         <Navbar />
       </div>
     </section>

@@ -12,6 +12,7 @@
     "@pinecone-database/pinecone": "^1.0.1",
     "@tensorflow/tfjs-node": "^4.11.0",
     "autoprefixer": "10.4.15",
+    "encoding": "^0.1.13",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "express-session": "^1.17.3",
