@@ -1,6 +1,7 @@
 import { loadLayersModel, tensor2d } from '@tensorflow/tfjs-node';
 import { db } from '../../utils/firebase';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc } from "firebase/firestore";
+import Cookies from 'js-cookie';
 
 const addDataToFirestore = async (collectionName, data) => {
   try {
@@ -18,9 +19,10 @@ async function loadModel() {
 }
 
 export default async function handler(req, res) {
+  const inputData = req.body;
+
   try {
     const model = await loadModel();
-    const inputData = req.body;
 
     // Check if the model is loaded correctly
     if (!model) {
@@ -30,12 +32,12 @@ export default async function handler(req, res) {
 
     // You can now use the loaded model for predictions or other tasks
     // For example, you can make a test prediction here
-    const testInput = tensor2d([inputData], [1, 8]);
+    const testInput = tensor2d([inputData.array], [1, 8]);
     const predictions = await model.predict(testInput).dataSync();
     const dataToAdd = {
-      email: "test@gmail.com",
-      "health-condition": "severe",
-      name: "ben",
+      userId: inputData.userId,
+      "health-score": predictions[0],
+      email: inputData.userEmail,
     };
     addDataToFirestore("users", dataToAdd);
     

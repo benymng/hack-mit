@@ -61,26 +61,28 @@ export default function Test() {
   };
 
   return (
-    <div className="bg-white h-screen">
-      <Form data={userData} updateShowImage={updateShowImage} />
-      {(!userData || showImage) && (
-        <img
-          className="mx-auto border-none rounded-3xl my-10"
-          src={snapshot}
-        />
-      )}
-      {!captured && !showImage && (
-        <div className="flex mx-auto w-4/5 lg:w-1/2 my-10">
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            videoConstraints={{ facingMode: "environment" }}
-            style={{ width: "100%", height: "100%", borderRadius: "2em" }}
+    <div className="flex flex-col min-h-screen">
+      <div className="bg-white">
+        <Form data={userData} updateShowImage={updateShowImage} />
+        {(!userData || showImage) && (
+          <img
+            className="mx-auto border-none rounded-3xl my-4"
+            src={snapshot}
           />
-        </div>
-      )}
-      <div className="mt-10 flex justify-center items-center h-screenflex mx-auto">
+        )}
+        {!captured && !showImage && (
+          <div className="flex mx-auto w-4/5 lg:w-1/2 my-4">
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              videoConstraints={{ facingMode: "environment" }}
+              style={{ width: "100%", height: "100%", borderRadius: "2em" }}
+            />
+          </div>
+        )}
+      </div>
+      <div className="flex justify-center items-center flex-grow">
         {!captured && (
           <button
             className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
@@ -103,11 +105,10 @@ export default function Test() {
             >
               Confirm
             </button>
-
           </>
         )}
       </div>
-      <div className="flex items-center justify-center p-4 bottom-0 absolute w-full bg-slate-100 rounded-t-3xl">
+      <div className="sticky bottom-0 w-full h-16 p-4 bg-slate-100 rounded-t-3xl">
         <Navbar />
       </div>
     </div>

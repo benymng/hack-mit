@@ -3,9 +3,12 @@ import React, { useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { UserLogin } from "./components/UserLogin";
 import Navbar from "./components/NavBar";
+import firebase from "@/utils/firebase";
 
 export default function Home() {
   const router = useRouter();
+  var user = firebase.auth().currentUser;
+  console.log(user)
 
   return (
     <section className="bg-white h-screen">
