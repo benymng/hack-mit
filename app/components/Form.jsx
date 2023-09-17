@@ -14,9 +14,60 @@ export const Form = ({ data, redo }) => {
   const [bmi, setBMI] = useState(data["BMI"]);
   const [diabetesPedigreeDegree, setDiabetesPedigreeDegree] = useState(data["Diabetes Pedigree Degree"]);
   const [age, setAge] = useState(data["Age"]);
+  const [numbers, setNumbers] = useState()
+  const [errorMessage, setErrorMessage] = useState("")
+  const [prediction, setPrediction] = useState(0)
+
+  const getPrediction = async (inputData) => {
+    try {
+      const response = await fetch('/api/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // Set the content type to JSON
+        },
+        body: JSON.stringify(inputData), // Send inputData as JSON in the request body
+      })
+      if (response.ok) {
+        const responseData = await response.json();
+        setPrediction(responseData.predictions)
+      }
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const numberFields = [
+      pregnancies,
+      glucose,
+      bloodPressure,
+      skinThickness,
+      insulin,
+      bmi,
+      diabetesPedigreeDegree,
+      age,
+    ];
+  
+    // Check if all numberFields are valid numbers
+    const areAllNumbersValid = numberFields.every((value) => !isNaN(parseFloat(value)));
+  
+    if (areAllNumbersValid) {
+      const numbersArray = numberFields.map((value) => parseFloat(value));
+      
+      // Call getPrediction with the numbersArray
+      getPrediction(numbersArray);
+    } else {
+      setErrorMessage('Please enter valid numeric values for all fields');
+    }
+  };
+  
+  
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+      <h1>{numbers}</h1>
+      <h1>{prediction[0]}</h1>
       <div className="mx-auto max-w-lg text-center">
         <h1 className="text-2xl font-bold sm:text-3xl">Your health data:</h1>
 
@@ -26,7 +77,7 @@ export const Form = ({ data, redo }) => {
         </p>
       </div>
 
-      <form className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+      <form className="mx-auto mb-0 mt-8 max-w-md space-y-4" onSubmit={handleSubmit}>
         <div>
           <div className="relative">
             <div>
@@ -163,6 +214,7 @@ export const Form = ({ data, redo }) => {
         <div className="flex items-center justify-between">
           <button
             type="submit"
+            onClick={handleSubmit}
             className="flex-1 mx-1 inline-block rounded-lg bg-blue-400 px-5 py-3 text-sm font-semibold text-white"
           >
             Confirm

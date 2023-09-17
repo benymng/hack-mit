@@ -60,7 +60,7 @@ export default function Test() {
   };
 
   return (
-    <div>
+    <div className="bg-white h-screen">
       <Form data={userData} updateShowImage={updateShowImage} />
       {(!userData || showImage) && (
         <img
