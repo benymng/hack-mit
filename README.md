@@ -60,9 +60,9 @@ The project comprises both frontend and backend components:
   - Processing text from images and associating key-value pairs
   - Utilizes Django as the web framework
   - Setting up vector databases and matching
+  - Creating a method of communication within a group/community
   - Data communication between frontend and backend
-  - Basic machine learning models for prediction
-  - Potential integration with large language models (LLMs)
+  - Neural Network models for prediction
 
 The core process involves taking pictures of paper documents, extracting key information using computer vision, user questionnaires processed through LLMs, and matching users to unique communities based on health data and other factors.
 
@@ -89,7 +89,7 @@ The project utilizes a diverse technology stack:
   - TensorFlow
   - Tesseract
 
-- **Form Creation**:
+- **Presentation**:
   - Canva
   - Figma
   - Google Slides
@@ -97,9 +97,9 @@ The project utilizes a diverse technology stack:
 ## Team and Responsibilities
 
 - John: Figma Mockup, Frontend Application of Mobile Site, Pitch Deck
-- Siya: Predictive Models, Computer Vision, Frontend, LLM Integration, Pitch Deck
+- Siya: Predictive Models, Computer Vision, Frontend, Pitch Deck
 - Ben: Computer Vision, Predictive Models, Vector Database, Github & Git Reposetory Setup
-- Auston: Backend (API), Computer Vision, LLM Integration
+- Auston: Backend (API), Computer Vision, Messaging Integration
 
 ## Development Timeline
 
@@ -108,10 +108,9 @@ Here's an overview of the project development timeline:
 - Integration and pitch deck: 6 hours
 - Figma design: 2.5 hours
 - Frontend development: 12 hours
-- LLM integration: On hold (unless time allows)
 - Computer vision MVP: 12 hours
 - Predictive model MVP: 8 hours
-- Community matching via vector database: 6-hour MVP
+- Community matching via vector database: 6-hour
 
 ## Computer Vision Repositories
 
