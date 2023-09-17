@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 
 export const Form = ({ data, redo }) => {
   // Check if data is empty or not provided
@@ -54,9 +55,11 @@ export const Form = ({ data, redo }) => {
   
     if (areAllNumbersValid) {
       const numbersArray = numberFields.map((value) => parseFloat(value));
-      
-      // Call getPrediction with the numbersArray
-      getPrediction(numbersArray);
+      const inputValue = {}
+      inputValue['array'] = numbersArray;
+      inputValue['userId'] = Cookies.get('userId')
+      inputValue['userEmail'] = Cookies.get('userEmail')
+      getPrediction(inputValue);
     } else {
       setErrorMessage('Please enter valid numeric values for all fields');
     }

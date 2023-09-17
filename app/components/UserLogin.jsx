@@ -4,6 +4,7 @@ import { signInWithGoogle } from "../../utils/firebase";
 import React, { useEffect, useState } from "react";
 import firebase from "../../utils/firebase";
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 export const UserLogin = () => {
   const router = useRouter();
@@ -14,6 +15,8 @@ export const UserLogin = () => {
       if (!user) {
         setLoaded(true);
       }
+      Cookies.set('userId', user?.uid)
+      Cookies.set('userEmail', user?.email)
       setUser(user);
       // console.log(user.uid);
       setLoaded(true);
@@ -28,6 +31,8 @@ export const UserLogin = () => {
 
   const signOut = () => {
     firebase.auth().signOut();
+    Cookies.remove('userId')
+    Cookies.remove('userEmail')
   };
 
   if (!loaded) {
